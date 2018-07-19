@@ -260,7 +260,7 @@ function deleteFile(fileId) {
 //* Nutrition API
 let globalSearch;
 let foodReport;
-
+const mykey = config.API_Key;
 
   function ingredients() {
     const table = $('#example').DataTable();
@@ -268,7 +268,7 @@ let foodReport;
     let foodItem = table.cell( this ).data();
     console.log(foodItem);
 
-      fetch('https://api.nal.usda.gov/ndb/search/?q=' + foodItem + '&format=json&max=1&api_key=oMX1F2fp47ODPXmZg7LxM5OAq5f78VpVt3zAFyzm')
+      fetch('https://api.nal.usda.gov/ndb/search/?q=' + foodItem + '&format=json&max=1&api_key=' + mykey)
         .then(function(response) {
           return response.json();
         })
@@ -279,7 +279,7 @@ let foodReport;
           let searchNo = globalSearch.list.item["0"].ndbno;
           console.log(searchNo);
 
-          fetch('https://api.nal.usda.gov/ndb/reports/?ndbno=' + searchNo + '&type=f&format=json&api_key=oMX1F2fp47ODPXmZg7LxM5OAq5f78VpVt3zAFyzm')
+          fetch('https://api.nal.usda.gov/ndb/reports/?ndbno=' + searchNo + '&type=f&format=json&api_key=' + mykey)
             .then(function(response) {
               return response.json();
             })
