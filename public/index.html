@@ -4,58 +4,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="slick/slick.css"/>           <!-- slick slider plugin css -->
+  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>     <!-- slick slider plugin css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <link rel="stylesheet" href="main.css">
   <title>Food Share</title>
 </head>
 
 <body>
-
-  <div class="container">
-    <header class="head">
-      <div class="wrap">
-        <h1 class="title">Food Share</h1>
-        <p class="explain">The easy way to keep food waste to a minimum and money in your pocket!</p>
-      </div>
-      <ul class="nav">
-        <li><a href="add.html"><img class="icon" src="img/simple-apple.png" alt="apple clipart"> Add Your Food</a></li>
-        <li><a href="available.html"><img class="icon" src="img/broccoli.png" alt="broccoli clipart"> Find Available Food </a></li>
-        <li><a href="pounds.html"><img class="icon" src="img/orange.png" alt="orange clipart"> Amount of Food Saved</a></li>
-      </ul>
-    </header>
-
-    <div class="half list">Recently Added Food
-      <div id="list-container"></div>
-      <p>Login to contact other users</p>
-    </div>
-       <!-- javascript call to bring up items posted in last 2 days  -->
-    <div class="half login">
-      <h2>User Login</h2>
-      <form action="" method="post">
-        <div class="formInput">
-          <label for="userId">User ID:</label>
-          <input class="textSize" id="userId" type="text" name="name" size="15">
-        </div>
-        <div class="formInput">
-          <label for="password">Password:</label>
-          <input class="textSize" id="password" type="text" name="password" size="13">
-        </div>
-        <input class="logButton" type="submit" value="Log In">
-        <input class="logButton" type="submit" value="Create Account">
-      </form>
-    </div>
-      <!-- once logged in should show members name and how many lbs they have saved -->
-    <div class="item item4">Panels</div>
+  <div class='section1'>
+    <a href='#flex-wrap' class='logCall'>LogIn</a>        <!-- smooth scrolls to login section -->
+    <h1 class='name'>FoodShare</h1>
+    <p class='explain'>The easy way to keep food waste to a minimum and money in your pocket!</p>
+    <a href='#section2' class='scrollButton'>Find Out More<br><img class='arrow' src='img/downArrow2.png' alt='down scroll arrow image'></a>    <!-- smooth scrolls to panels section -->
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
+  <div id='section2'>                                         <!-- section for slick slider with info on food waste -->
+      <h2 class="callout">Why You Should FoodShare</h2>
+      <div class="info">
+        <div class="panels">Roughly one third of the food produced in the world for human consumption every year — approximately 1.3 billion tonnes — gets lost or wasted.</div>
+        <div class="panels">The United States as a whole wastes more than $160 billion in food a year.</div>
+        <div class="panels">Fruits and vegetables, plus roots and tubers have the highest wastage rates of any food.</div>
+        <div class="panels">Per capita waste by consumers is between 209-253 lbs a year in Europe and North America</div>
+        <div class="panels">Food waste also amounts to a major squandering of resources, including water, land, energy, labour and capital, contributing to global warming and climate change.</div>
+        <div class="panels">Even if just one-fourth of the food currently lost or wasted globally could be saved, it would be enough to feed 870 million hungry people in the world.</div>
+      </div>
+        <p class='cite'>*Statistics provided by The Food and Agriculture Organization of the United Nations</p>  <!-- http://www.fao.org/save-food/resources/keyfindings/en/ -->
+    </div>
+
+    <div id='section3'>     <!-- section for login and about with get call for most recent items added to db -->
+
+      <div class="flex-wrap" id="flex-wrap">
+            <form method='post' action="/api/user">
+                <input type="radio" name="rg" id="sign-in" checked/>
+                <input type="radio" name="rg" id="sign-up" />
+
+                <label for="sign-in">Sign In</label>
+                <label for="sign-up">Sign Up</label>
+
+                <input class="sign-up" type="name" id="name" placeholder ="Your Name" />
+                <input class="sign-up" type="email" id="email" placeholder="Email" />
+                <input class="sign-in" type="email" id="emailSignIn" placeholder="Email" />
+                <input class="sign-up" type="phone" id="phone" placeholder ="Phone" />
+                <input class="sign-in" type="password" id="passwordSignIn" placeholder ="Password" />
+                <input class="sign-up" type="password" id="password" placeholder ="Password" />
+                <input class="sign-up" type="password" placeholder ="Repeat Password" />
+                <a href="account.html"><button type="button" onclick="handleNewUser()" >Submit</button></a>
+            </form>
+      </div>
+
+      <div class='about'>
+        <h2 class='workCall'>How FoodShare Works</h2>
+        <p class='works'>FoodShare is the easy way to eliminate food waste and save money.  Easily connect with friends, family and neighbors to share food that you won't be able to utilize.  Swap leftovers, share spices, or post food that will go bad while you are out of town.  Do it all for free!  Here are some of the most recently posted items on FoodShare:</p>
+        <div id="list-container-home"></div>  <!-- div for HTTP get call to load last 3 items for db via home.js -->
+      </div>
+    </div>
+
+
+          <!-- <div id='modal'></div> -->
+
+    <footer>
+        <p>&copy 2018 FoodShare</p>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  <!-- jquery -->
+    <script type="text/javascript" src="slick/slick.min.js"></script>   <!-- slick slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="/js/home.js"></script>
+    <!-- when page loaded refreshes the list of items from the db -->
     <script>
       $(document).ready(function() {
-        refreshFileList();
+        refreshFileListHome();
       });
     </script>
 
-</body>
+  </body>
 
 
 </html>

@@ -1,121 +1,252 @@
-body {
+/* StyleSheet for Home Page of FoodShare */
+
+body, html {
+  box-sizing: border-box;
+  background-color: #fff;
   margin: 0;
+  font-size: 16px;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 3fr 2fr;
-  grid-gap: 20px;
-  height: 900px;
-}
-
-.item {
-  background-color: blue;
-}
-
-.title {
-  font-size: 4rem;
-  margin-bottom: -10px;
-}
-
-.list {
+/* Title Page */
+.section1 {
+  background: url(img/fruits-vegetables.png) no-repeat center;
+  background-size: cover;
+  height: 100vh;                      /* background pic to cover view height of browser */
+  position: relative;
   text-align: center;
-  color: black;
-  font-size: 1.4rem;
-  padding-top: 10px;
 }
 
-.login {
-  text-align: center;
-  border: 1px solid black;
-  margin: 10px;
-  border-radius: 5%;
-  padding-top: 20px;
-  background-image: url("img/fruits-vegetables.png");
-}
-
-.logButton {
-  padding: 10px 30px 10px 30px;
-  background-color: blue;
-  color: white;
-  margin: 25px 10px 10px 10px;
-}
-
-.formInput {
-  text-align: left;
-  margin: 30px 20px 5px 20px;
-  font-size: 1.2rem;
+.logCall {                      /*fix log in call to top right corner of home page when hit scrolls to login section */
+  position: absolute;
+  right: 4%;
+  top: 4%;
+  color: purple;
   font-weight: bold;
-}
-
-
-.head {
-  text-align: center;
-  color: white;
-  grid-column: span 2;
-  background-color: #A9A9A9;
-}
-
-.nav {
-  list-style-type: none;
-  margin-left: -25px;
-}
-
-a {
-  color: white;
+  font-size: 1.3rem;
   text-decoration: none;
 }
 
-.item4 {
-  grid-column: 1 / -1;
-}
-
-.half {
-  grid-column: span 1;
-}
-
-.icon {
-  height: 20px;
-  width: 20px;
-  padding: 2px;
+.name {
+  margin: auto;
+  color: purple;
+  font-size: 3rem;
+  padding-top: 40vh;
 }
 
 .explain {
-  padding-left: 5px;
-  padding-right: 5px;
+  margin: auto;
+  padding: 0 15px 0 15px;
+  color: purple;
+  font-size: 1.2rem;
+  margin-bottom: 10%;
 }
 
-#list-container li{
-  list-style-type: none;
+.scrollButton {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.scrollButton:link {   /*make link for smooth scroll purple like the rest of font */
+  color: purple;
+}
+
+.arrow {
+  margin: auto;
+  height: 7%;       /*issue when window is shrinked horizontally */
+  width: 11%;
+}
+
+/* Slider / Info */
+#section2 {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#section2:focus {
+  outline: none;  /* for chrome adds outline around element when in focus */
+}
+
+.callout {
+  text-align: center;
+  color: purple;
+}
+
+.panels {                           /*design for slick plugin panels */
+  margin: 5px 20px 20px 20px;
+  height: 15rem;
+  padding: 25px 40px 0 40px;
+  border-radius: 5%;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  box-shadow: .5px .5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cite {
+  text-align: center;
+  font-size: .6rem;
+}
+
+/* Login, About, and recent foods */
+#section3 {
+  margin-bottom: 30px;
+}
+
+
+.about {
+  background-color: #1abc9c;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+  margin-left: 2%;
+}
+
+.workCall {
+  padding-top: 10px;
+}
+
+.list-group {               /*styling for http get request for last 3 items added to database adding in via home.js*/
+  list-style: square;
+  color: purple;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.works {
+  padding: 0 15px 0 15px;
   text-align: left;
 }
 
-/* Media Queries ------------------ */
-@media (min-width: 769px) {
-  .nav {
-    float: right;
-    margin-right: 50px;
-    margin-top: 35px;
-    margin-bottom: -10px;
-    text-align: left;
-  }
 
-  .wrap {
-    float: left;
-    margin-left: 100px;
-  }
+/* Login form styling
+// Copyright (c) 2018 by jakob-e (https://codepen.io/jakob-e/pen/PWGWox)
+*/
 
-  .login, .formInput {
-    font-size: 1.6rem;
-  }
+    /*  fix position radio input off-canvas */
+    input[type="radio"] {
+        position: fixed;
+        left: -100px;
+    }
 
-  .formInput {
-    margin-left: 25%;
-  }
+    /* style input fields (note hidden by default) */
+    input:not([type="radio"]) {
+        appearance: none;
+        background-color: #fff;
+        display: block;
+        transition: 300ms ease;
+        border-radius: 7px;
+        border: 0;
+        max-height: 0;
+        margin: 0;
+        padding: 0 10px;
+        overflow: hidden;
+        width: 250px;
+        opacity: 0;
+        font-size: 16px;
+        text-align: center;
+        outline: 0;
+    }
 
-  .textSize /*text box size for login */{
-    font-size: 16pt;
-  }
+    /*  show input based on radio selection */
+    [id="sign-in"]:checked ~ input.sign-in,
+    [id="sign-up"]:checked ~ input.sign-up {
+        max-height: 40px;
+        padding: 10px;
+        margin: 10px 0;
+        opacity: 1;
+    }
 
+    /*   submit button */
+    button {
+        width: 250px;
+        height: 40px;
+        border-radius: 7px;
+        background-color: #16a085;
+        font-size: 0;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    label {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        font-weight: 700;
+        cursor: pointer;
+        color: #16a085;
+        transition: 300ms ease;
+        width: calc(100% / 3 - 4px);
+        margin-bottom: 10px;
+    }
+
+
+    /*  set active label marker */
+    [id="sign-in"]:checked ~ [for="sign-in"],
+    [id="sign-up"]:checked ~ [for="sign-up"] {
+        color: #fff;
+        font-size: 25px;
+    }
+
+    /* styling wrapper */
+    .flex-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 300px;
+        text-align: center;
+        background-color: #1abc9c;
+        font-size: 16px;
+        border-top-right-radius: 5%;
+        border-bottom-right-radius: 5%;
+        margin-right: 2%;
+    }
+
+/* footer */
+footer {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+
+/* Media Query */
+@media only screen and (min-width: 768px) {     /* changes as the screen goes from mobile to desktop */
+    .name {
+      font-size: 4rem;
+    }
+
+    .explain {
+      font-size: 1.5rem;
+    }
+
+    .arrow {            /*resizes arrow that smooth scrolls */
+      height: 4%;
+      width: 4%;
+    }
+
+    .panels {
+      height: 18rem;
+    }
+
+    #section3 {                                     /*CSS grid for about and login as screen gets bigger */
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .about {
+      font-size: 1.2rem;              /*match height with login (class=flex-wrap) when on larger screen */
+      height: 440px;
+    }
+
+    .flex-wrap {                /*match height with about when on larger screen */
+      height: 440px;
+    }
+}
+
+@media only screen and (min-width: 400px) {
+  .panels {
+    height: 22rem;
+  }
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <link rel="stylesheet" href="account.css">
+  <title>Food Share My account</title>
+</head>
+
+<body>
+  <header>
+      <h1 class='title'>FoodShare</h1>
+      <h3 class='title'>Welcome ---User---!</h3>
+  </header>
+
+
+  <div id="myAccount">
+    <div class="add">
+      <h2>Add Your Food</h2>
+        <form id="add-file-form">
+          <div id="form-container">
+          <input type="hidden" id="file-id" value="" />
+          <div class="form-group">
+            <label for="file-title">Food (include Brand if available)</label>
+            <input type="text" class="form-control" id="file-title-add" placeholder="E.g. JIF Peanut Butter">
+          </div>
+          <div class="form-group">
+            <label for="file-description">Description</label>
+            <input type="text" class="form-control" id="file-description-add" placeholder="Description (Lbs, oz, etc...)">
+          </div>
+          <div class="form-group">
+            <label for="file-expiration">Expiration Date</label>
+            <input type="text" class="form-control" id="file-expiration-add" placeholder="If no Exp then date bought">
+          </div>
+          <div class="form-group">
+            <label for="file-user">Username</label>
+            <input type="text" class="form-control" id="file-user-add" placeholder="FoodShare Username">
+          </div>
+          </div>
+          <button type="button" onclick="submitAddFileForm()" class="btn btn-success addButtons">Submit</button>
+          <button type="button" onclick="cancelFileForm()" class="btn btn-link addButtons">Cancel</button>
+        </form>
+    </div>
+
+    <div class="edit">
+      <h2>Edit or Delete Your Food</h2>
+      <div id="list-container"></div>
+    </div>
+  </div>
+
+      <div id="modal"></div>
+
+      <div class="available">
+        <h2>Food Available</h2>
+          <table id="example" class="responsive display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Date Added</th>
+                    <th>Food<br><p style="font-size:.6rem">Click for ingredients<br>If Applicable</p></th>
+                    <th>Description</th>
+                    <th>Expiration Date</th>
+                    <th>FoodShare User</th>
+                    <th>Contact<br><p style="font-size:.6rem">Click to Text User</p></th>
+                </tr>
+            </thead>
+        </table>
+        <p>* Note the Ingredients Application works best if the brand info is included on the food items.  Ingredients will not be applicable for produce (fruit and veggies).</p>
+      </div>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+      <script src="/js/app.js"></script>
+      <script>
+        $(document).ready(function () {
+          refreshFileList();
+          refreshTable();
+          setForm();
+        });
+      </script>
+      <script> $(document).ready(function() {
+        $('#example').DataTable( {
+          "ajax": {"url":"/api/account","dataSrc":""},
+          "columns": [
+                  { "data": "created_at"},
+                  { "data": "title" ,
+                    "render": function ( data, type, row, meta ) {
+                     return '<p style="color:blue;"  onclick="ingredients()">' + data + '</p>';
+                   }},
+                  { "data": "description"},
+                  { "data": "expiration"},
+                  { "data": "user"},
+                  { "data": "contact",
+                    "render": function ( data, type, row, meta ) {
+                    return '<img src="img/phone-blue.png" onclick="contact()" alt="phone icon">';
+                  }},
+                  ],
+          "columnDefs": [
+                  {"className": "dt-center", "targets": "_all"}
+                  ],
+                } );
+      } ) </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> <!-- Copyright (c) 2012 Kyle Fox -->
+    </body>
+  </html>
