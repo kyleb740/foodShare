@@ -22,12 +22,16 @@ function getFiles() {
 /**
  * Render a list of files
  */
+function formatDate(date) {
+  const correct = new Date(date);
+  return correct.toDateString();
+}
 function renderFiles(files) {
 
   const listItems = files.map(file => `
 
     <li class="list-group-item">
-      <strong>${file.title}</strong> - ${file.description} - ${file.expiration} - ${file.user}
+      <strong>${file.title}</strong> - ${file.description} - ${formatDate(file.expiration)} - ${file.user}
       <span class="pull-right">
         <button type="button" class="btn btn-xs btn-default" onclick="handleEditFileClick(this)" data-file-id="${file._id}">Edit</button>
         <button type="button" class="btn btn-xs btn-danger" onclick="handleDeleteFileClick(this)" data-file-id="${file._id}">Del</button>
@@ -294,31 +298,3 @@ const mykey = config.API_Key;
 
     } );
   }
-
-
-
-  // function handleNutritionClick(element) {
-  //   const fileTitle = element.getAttribute('data-file-title');
-  //   console.log('in handleNutritionClick', fileTitle);
-  //   fetch('https://api.nal.usda.gov/ndb/search/?q=' + fileTitle + '&format=json&max=1&api_key=oMX1F2fp47ODPXmZg7LxM5OAq5f78VpVt3zAFyzm')
-  //     .then(function(response) {
-  //       return response.json();
-  //     })
-  //     .then(function(myJson) {
-  //       console.log(myJson);
-  //       globalSearch = myJson;
-  //
-  //       let searchNo = globalSearch.list.item["0"].ndbno;
-  //       console.log(searchNo);
-  //
-  //       fetch('https://api.nal.usda.gov/ndb/reports/?ndbno=' + searchNo + '&type=f&format=json&api_key=oMX1F2fp47ODPXmZg7LxM5OAq5f78VpVt3zAFyzm')
-  //         .then(function(response) {
-  //           return response.json();
-  //         })
-  //         .then(function(myReport) {
-  //           foodReport = myReport;
-  //           let report = foodReport.report.food.ing.desc;
-  //           $('#modal').text('Ingredients:' + report).modal();
-  //         });
-  //       });
-  //     };

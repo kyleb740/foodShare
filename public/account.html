@@ -75,7 +75,7 @@
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src='/js/config.js'></script>
       <script src="/js/app.js"></script>
-    
+
       <script>
         $(document).ready(function () {
           refreshFileList();
@@ -86,14 +86,25 @@
       <script> $(document).ready(function() {
         $('#example').DataTable( {
           "ajax": {"url":"/api/account","dataSrc":""},
+          "iDisplayLength": 50,
           "columns": [
-                  { "data": "created_at"},
+                  { "data": "created_at",
+                    "render": function (data) {
+                      var date = new Date(data);
+                      var month = date.getMonth() + 1;
+                      return (month.length > 1 ? month : month) + "/" + date.getDate() + "/" + date.getFullYear();
+                  }},
                   { "data": "title" ,
                     "render": function ( data, type, row, meta ) {
                      return '<p style="color:blue;"  onclick="ingredients()">' + data + '</p>';
                    }},
                   { "data": "description"},
-                  { "data": "expiration"},
+                  { "data": "expiration",
+                    "render": function (data) {
+                      var date = new Date(data);
+                      var month = date.getMonth() + 1;
+                      return (month.length > 1 ? month : month) + "/" + date.getDate() + "/" + date.getFullYear();
+                  }},
                   { "data": "user"},
                   { "data": "contact",
                     "render": function ( data, type, row, meta ) {
