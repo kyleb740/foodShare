@@ -31,11 +31,9 @@ function renderFiles(files) {
   const listItems = files.map(file => `
 
     <li class="list-group-item">
-      <strong>${file.title}</strong> - ${file.description} - ${formatDate(file.expiration)} - ${file.user}
-      <span class="pull-right">
-        <button type="button" class="btn btn-xs btn-default" onclick="handleEditFileClick(this)" data-file-id="${file._id}">Edit</button>
-        <button type="button" class="btn btn-xs btn-danger" onclick="handleDeleteFileClick(this)" data-file-id="${file._id}">Del</button>
-      </span>
+      <span class="tab"><strong>${file.title}</strong></span> <span class="tab">${file.description}</span> <span class="tab">${formatDate(file.expiration)}</span> <span class="tab">${file.user}</span>
+        <span class="tab"><button type="button" class="btn btn-xs btn-default" onclick="handleEditFileClick(this)" data-file-id="${file._id}">Edit</button>
+        <button type="button" class="btn btn-xs btn-danger" onclick="handleDeleteFileClick(this)" data-file-id="${file._id}">Del</button></span>
     </li>`
 
   );

@@ -22,9 +22,15 @@ header {
   padding-left: 5px;
 }
 
+.list-group { display: table;
+              border-spacing: 5px 2px;}
+.list-group-item {display: table-row; }
+.tab {display: table-cell;}
+
+
 /* making form to add food lineup */
 #myAccount form          { display: table;
-                           border-spacing: 5px 10px;}
+                           border-spacing: 5px 2px;}
 .form-group              { display: table-row; }
 #myAccount label         { display: table-cell; }
 #myAccount input         { display: table-cell; }

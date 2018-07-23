@@ -10,5 +10,5 @@ Steps to get FoodShare up and running:
   Run ‘mongod’ to start mongo service
   Run ‘npm start’ to begin the app server process
   Open a localhost windows to the port it’s running on
-  Go to the signup panel and enter your info
+  Go to the sign in panel and enter email: kebrew2@gmail.com password: pass
   Click submit then you will be taken to the account page where you can use CRUD functions
