@@ -3,7 +3,7 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const mailjet = require ('node-mailjet')
 
-
+// mailjet will be added at another time working this out
 // const request = mailjet
 //   .post("send")
 //   .request({
@@ -26,7 +26,7 @@ const mailjet = require ('node-mailjet')
 //       console.log (response.statusCode, err);
 //   });
 
-
+// CRUD Operations
 /**
  * C - reate
  */

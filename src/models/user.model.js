@@ -1,3 +1,4 @@
+// User Schema
 // Load mongoose package
 const mongoose = require('mongoose');
 
